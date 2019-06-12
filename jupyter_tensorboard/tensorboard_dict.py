@@ -52,13 +52,18 @@ class TensorBoardDict(dict):
                 attempt = 1
                 server_started = False
                 while attempt <= GlobalConfigs.TB_PROXY_SERVER_CHECKING_MAX_ATTEMPTS:
-                    res = requests.get(url=GlobalConfigs.TB_PROXY_SERVER_CHECKING_URL)
-                    if res.status_code == requests.codes.ok:
-                        self.logger.info('The tb proxy server has been started!')
-                        server_started = True
-                        break
-                    else:
-                        self.logger.info('The tb proxy server is not started. Retry after 2s')
+                    try:
+                        res = requests.get(url=GlobalConfigs.TB_PROXY_SERVER_CHECKING_URL)
+                        if res.status_code == requests.codes.ok:
+                            self.logger.info('The tb proxy server has been started!')
+                            server_started = True
+                            break
+                        else:
+                            self.logger.info('The tb proxy server is not started. Retry after 2s')
+                            time.sleep(2)
+                            attempt += 1
+                    except requests.ConnectionError as e:
+                        self.logger.info(e)
                         time.sleep(2)
                         attempt += 1
                 if not server_started:

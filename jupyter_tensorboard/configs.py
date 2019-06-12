@@ -11,4 +11,4 @@ class GlobalConfigs:
 
     TB_PROXY_SERVER_CHECKING_MAX_ATTEMPTS = 10
 
-    TB_PROXY_SERVER_LAUNCH_COMMAND = 'python /etc/jupyter_tensorboard/jupyter_tensorboard/tensorboard_proxy_server.py'
+    TB_PROXY_SERVER_LAUNCH_COMMAND = 'python -m jupyter_tensorboard.tensorboard_proxy_server'
