@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from tornado import web
-from utils import concat_params_to_str
+from .utils import concat_params_to_str
 from notebook.base.handlers import IPythonHandler
 from notebook.utils import url_path_join as ujoin
 from notebook.base.handlers import path_regex
 import tornado.web
-from configs import GlobalConfigs
+from .configs import GlobalConfigs
 
 notebook_dir = None
 
