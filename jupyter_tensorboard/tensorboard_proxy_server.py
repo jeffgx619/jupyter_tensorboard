@@ -1,12 +1,15 @@
-from tornado import web
 import tornado.web
 import tornado.httpserver
 import tornado.ioloop
 import tornado.gen
 from tornado.options import options, define
-from tensorboard_proxy_handler import TensorboardProxyHandler
-import tensorboard_proxy_global as tb_global
-from configs import GlobalConfigs
+from .tensorboard_proxy_handler import TensorboardProxyHandler
+from .configs import GlobalConfigs
+import sys
+if sys.version_info[0] == 3:
+    from . import tensorboard_proxy_global as tb_global
+else:
+    import tensorboard_proxy_global as tb_global
 
 # srv settings
 define("port", default=GlobalConfigs.TB_PROXY_SERVER_PORT, help="run on the given port", type=int)
@@ -39,7 +42,7 @@ def main():
         tb_global.init()
         srv_instance.start()
     except KeyboardInterrupt as e:
-        print "server instance is forced to quit."
+        print ("server instance is forced to quit.")
         srv_instance.stop()
 
 if __name__ == "__main__":

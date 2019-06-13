@@ -3,11 +3,14 @@
 import sys
 import threading
 import time
-import tensorboard_proxy_global as tb_global
 from collections import namedtuple
 import logging
-
 import six
+
+if sys.version_info[0] == 3:
+    from . import tensorboard_proxy_global as tb_global
+else:
+    import tensorboard_proxy_global as tb_global
 
 sys.argv = ["tensorboard"]
 

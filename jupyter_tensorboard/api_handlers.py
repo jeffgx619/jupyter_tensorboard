@@ -7,7 +7,7 @@ from tornado import web
 from notebook.base.handlers import APIHandler
 import requests
 from .handlers import notebook_dir
-from configs import GlobalConfigs
+from .configs import GlobalConfigs
 
 
 def _trim_notebook_dir(dir):

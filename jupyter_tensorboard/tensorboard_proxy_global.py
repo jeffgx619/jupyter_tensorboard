@@ -1,4 +1,4 @@
-from tensorboard_manager import TensorboardManger
+from .tensorboard_manager import TensorboardManger
 
 
 def init():

@@ -1,10 +1,14 @@
-from tornado import web
 import tornado.web
-import json
+import json, sys
 import logging
 from tornado.wsgi import WSGIContainer
-import tensorboard_proxy_global as tb_global
-from utils import split_params_to_dict
+from .utils import split_params_to_dict
+if sys.version_info[0] == 3:
+    from . import tensorboard_proxy_global as tb_global
+else:
+    import tensorboard_proxy_global as tb_global
+
+
 
 class TensorboardProxyHandler(tornado.web.RequestHandler):
     logger = logging.getLogger(__name__)
@@ -16,6 +20,7 @@ class TensorboardProxyHandler(tornado.web.RequestHandler):
             self.set_status(400)
             self.finish("Should provide tensorboard name")
             return
+
         params = split_params_to_dict(self.request.body)
         if 'name' not in params or not params['name']:
             self.set_status(400)

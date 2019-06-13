@@ -1,6 +1,6 @@
 from .handlers import notebook_dir
 import itertools, os, threading, logging, time
-from configs import GlobalConfigs
+from .configs import GlobalConfigs
 
 class TensorBoardDict(dict):
     def __init__(self):
